@@ -301,7 +301,7 @@
 
     <!-- Footer Section with Contact Form -->
     <footer id="contact" class="fade-in container mx-auto px-4 md:px-8 py-12 text-center border-t border-gray-700 mt-12 z-10">
-        <h2 class="text-3xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]">Get in Touch</h2>
+        <h2 class="text-3xl md:text-5xl font-bold mb-4 text-[var(--text-color)] drop-shadow-md">Get in Touch</h2>
         <p class="text-[var(--text-color)] mb-6 max-w-xl mx-auto">Feel free to reach out to me using the form below or connect with me on social media.</p>
 
         <!-- Contact Form -->
@@ -358,12 +358,15 @@
             observer.observe(fadeElement);
         });
 
-        // New JavaScript for 3-stage color change on scroll
-        window.addEventListener('scroll', () => {
+        // Function to handle the theme change based on scroll position
+        function updateThemeOnScroll() {
             const body = document.body;
             const scrollY = window.scrollY;
-            const midPoint = 500;
-            const endPoint = 1500;
+            const scrollableHeight = document.body.scrollHeight - window.innerHeight;
+
+            // Calculate mid and end points as a percentage of the total scrollable height
+            const midPoint = scrollableHeight * 0.3; // 30% of the scrollable area
+            const endPoint = scrollableHeight * 0.7; // 70% of the scrollable area
 
             if (scrollY > endPoint) {
                 // Third theme triggered
@@ -378,7 +381,12 @@
                 body.classList.remove('scrolled-mid');
                 body.classList.remove('scrolled-end');
             }
-        });
+        }
+
+        // Event listeners to trigger the function on scroll and resize
+        window.addEventListener('scroll', updateThemeOnScroll);
+        window.addEventListener('resize', updateThemeOnScroll);
+        window.addEventListener('load', updateThemeOnScroll);
     </script>
 </body>
 </html>
