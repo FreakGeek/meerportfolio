@@ -336,8 +336,8 @@
             </ul>
         </nav>
         
-       <!-- Main Header Content -->
-		<div class="flex flex-col items-center mt-12 md:mt-24">
+        <!-- Main Header Content -->
+        <div class="flex flex-col items-center mt-12 md:mt-24">
             <h1 class="text-4xl md:text-7xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] animate-pulse mb-4">Meer Saif</h1>
             <h2 class="text-2xl md:text-3xl font-light text-gray-200 mb-6">Full-Stack & Game Developer</h2>
             <p class="text-base md:text-xl mt-4 max-w-3xl text-gray-300">
@@ -652,7 +652,7 @@
     <span class="keyword">public static void</span> main<span class="bracket">(</span><span class="keyword">String</span><span class="array-bracket">[]</span> args<span class="bracket">) {</span>
         <span class="keyword">String</span> <span class="property">stack</span> <span class="punctuation">=</span> <span class="string">"Full Stack & Game Developer"</span><span class="punctuation">;</span>
         <span class="keyword">int</span> <span class="property">yearsOfExperience</span> <span class="punctuation">=</span> <span class="number">11</span><span class="punctuation">;</span>
-        <span class="keyword">String</span> <span class="array-bracket">[]</span> <span class="property">skillSet</span> <span class="punctuation">=</span> <span class="bracket">{</span><span class="string">"Native Mobile Apps"</span><span class="comma">,</span> <span class="string">"Multi-platform apps"</span><span class="comma">,</span> <span class="string">"Back-end"</span><span class="comma">,</span> <span class="string">"Game Engine"</span><span class="bracket">}</span><span class="punctuation">;</span>
+        <span class="keyword">String</span> <span class="array-bracket"> []</span> <span class="property">skillSet</span> <span class="punctuation">=</span> <span class="bracket">{</span><span class="string">"Native Mobile Apps"</span><span class="comma">,</span> <span class="string">"Multi-platform apps"</span><span class="comma">,</span> <span class="string">"Back-end"</span><span class="comma">,</span> <span class="string">"Game Engine"</span><span class="bracket">}</span><span class="punctuation">;</span>
         <span class="keyword">boolean</span> <span class="property">letsConnect</span> <span class="punctuation">=</span> <span class="keyword">true</span><span class="punctuation">;</span> <span class="comment">// &#x1F600;</span>
     <span class="bracket">}</span>
 <span class="bracket">}</span>`;
@@ -711,8 +711,9 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting && !isTyping) {
                     typeWriter();
-                    // We can choose to unobserve after it has been typed once
-                    // observer.unobserve(entry.target);
+                    // This is the line that was commented out. It's now active.
+                    // It ensures the observer stops watching the element after the animation runs once.
+                    observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.5 });
