@@ -241,6 +241,69 @@
             display: block;
             opacity: 1;
         }
+
+        /* Custom styles for the new code block */
+        .code-block-container {
+            position: relative;
+            background-color: #1c1c1c; /* Dark background */
+            border-radius: 1.5rem; /* rounded-3xl */
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px #80f080;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .code-block-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .code-block-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background-color: #ff5f56; }
+        .dot-yellow { background-color: #ffbd2e; }
+        .dot-green { background-color: #27c93f; }
+
+        .code-block-filename {
+            font-family: 'Fira Code', 'Poppins', monospace;
+            color: #888;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .code-line {
+            white-space: pre-wrap;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1rem;
+            color: #d4d4d4;
+            line-height: 1.6;
+        }
+
+        /* Syntax highlighting classes */
+        .code-line .comment { color: #57a64a; }
+        .code-line .keyword { color: #569cd6; }
+        .code-line .string { color: #ce9178; }
+        .code-line .property { color: #9cdcfe; }
+        .code-line .bracket { color: #ffd700; }
+        .code-line .value { color: #d4d4d4; }
+        .code-line .array-bracket { color: #f2e307; }
+        .code-line .array-item { color: #9cacf3; }
+        .code-line .comma { color: #d4d4d4; }
+        .code-line .punctuation { color: #d4d4d4; }
+        .code-line .number { color: #b5cea8; }
     </style>
 </head>
 <body class="antialiased">
@@ -263,7 +326,7 @@
     </div>
 
     <!-- Header Section with Navigation -->
-    <header class="container mx-auto p-8 md:p-12 text-center relative z-10">
+    <header class="container mx-auto p-8 md:p-12 relative z-10">
         <!-- Navigation Menu in the top right -->
         <nav class="absolute top-8 right-8 z-10 hidden md:block">
             <ul class="flex space-x-6 text-gray-400 font-medium">
@@ -273,16 +336,37 @@
             </ul>
         </nav>
         
-        <div class="flex flex-col items-center mt-12 md:mt-24">
-            <!-- Profile Photo -->
-            <div class="mb-8">
-                <img src="https://media.licdn.com/dms/image/v2/D4D03AQGi5Ybf45MfaA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1670336815119?e=2147483647&v=beta&t=2MevF1AJQ6sxgIoNtTdEn54gUeGx6JNz2Om-kRE-yTc" alt="Profile Photo of John Doe" class="w-180 h-180 rounded-full object-cover colorful-card border-2 border-white/20 shadow-lg">
-            </div>
+       <!-- Main Header Content -->
+		<div class="flex flex-col items-center mt-12 md:mt-24">
             <h1 class="text-4xl md:text-7xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] animate-pulse mb-4">Meer Saif</h1>
             <h2 class="text-2xl md:text-3xl font-light text-gray-200 mb-6">Full-Stack & Game Developer</h2>
             <p class="text-base md:text-xl mt-4 max-w-3xl text-gray-300">
                 A passionate developer with a knack for crafting robust applications across multiple platforms. I thrive on solving complex problems and constantly learning to deliver high-quality, impactful digital solutions.
             </p>
+        </div>
+        
+        <!-- New Code Block Component -->
+        <div class="mt-12 md:mt-24 text-center">
+            <div class="code-block-container fade-in">
+                <!-- Header with dots and filename -->
+                <div class="code-block-header">
+                    <div class="code-block-dots">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                    </div>
+                    <span class="code-block-filename">developer.java</span>
+                </div>
+                <!-- Profile photo and code content -->
+                <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-8">
+                    <!-- Profile Photo -->
+                    <div class="mb-8 md:mb-0">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQGi5Ybf45MfaA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1670336815119?e=2147483647&v=beta&t=2MevF1AJQ6sxgIoNtTdEn54gUeGx6JNz2Om-kRE-yTc" alt="Profile Photo of Meer Saif" class="w-180 h-180 rounded-full object-cover colorful-card border-2 border-white/20 shadow-lg">
+                    </div>
+                    <!-- Code content container with typewriter effect -->
+                    <pre class="text-left mt-8 md:mt-0 overflow-hidden"><code id="typewriter" class="code-line"></code></pre>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -503,7 +587,7 @@
         window.addEventListener('load', updateThemeOnScroll);
 
 
-        // === New JavaScript for Form Validation ===
+        // === New JavaScript for Form Validation & Typewriter Effect ===
         
         // Get references to the form elements
         const contactForm = document.getElementById('contactForm');
@@ -560,6 +644,84 @@
 
         // Add the click event listener to the "Send Message" button
         sendMessageBtn.addEventListener('click', validateForm);
+
+        // === Typewriter Effect for the new code block ===
+        const typewriterElement = document.getElementById('typewriter');
+
+        const codeContent = `<span class="keyword">class</span> Main <span class="bracket">{</span>
+    <span class="keyword">public static void</span> main<span class="bracket">(</span><span class="keyword">String</span><span class="array-bracket">[]</span> args<span class="bracket">) {</span>
+        <span class="keyword">String</span> <span class="property">stack</span> <span class="punctuation">=</span> <span class="string">"Full Stack & Game Developer"</span><span class="punctuation">;</span>
+        <span class="keyword">int</span> <span class="property">yearsOfExperience</span> <span class="punctuation">=</span> <span class="number">11</span><span class="punctuation">;</span>
+        <span class="keyword">String</span> <span class="array-bracket">[]</span> <span class="property">skillSet</span> <span class="punctuation">=</span> <span class="bracket">{</span><span class="string">"Native Mobile Apps"</span><span class="comma">,</span> <span class="string">"Multi-platform apps"</span><span class="comma">,</span> <span class="string">"Back-end"</span><span class="comma">,</span> <span class="string">"Game Engine"</span><span class="bracket">}</span><span class="punctuation">;</span>
+        <span class="keyword">boolean</span> <span class="property">letsConnect</span> <span class="punctuation">=</span> <span class="keyword">true</span><span class="punctuation">;</span> <span class="comment">// &#x1F600;</span>
+    <span class="bracket">}</span>
+<span class="bracket">}</span>`;
+
+        let partIndex = 0;
+        let charIndexInPart = 0;
+        let isTyping = false;
+        let typedText = '';
+        
+        // This function will type out the code character by character
+        function typeWriter() {
+            if (isTyping) return;
+            isTyping = true;
+            typewriterElement.innerHTML = '';
+            partIndex = 0;
+            charIndexInPart = 0;
+            typedText = '';
+
+            // Split the code into an array of tags and plain text
+            const parts = codeContent.split(/(<[^>]+>)/g).filter(Boolean);
+
+            function type() {
+                if (partIndex < parts.length) {
+                    const currentPart = parts[partIndex];
+                    // Check if the current part is an HTML tag
+                    if (currentPart.startsWith('<') && currentPart.endsWith('>')) {
+                        // If it's a tag, append it completely and immediately move to the next part.
+                        typedText += currentPart;
+                        typewriterElement.innerHTML = typedText;
+                        partIndex++;
+                        charIndexInPart = 0;
+                        setTimeout(type, 10);
+                    } else {
+                        // If it's plain text, type it character by character.
+                        if (charIndexInPart < currentPart.length) {
+                            typedText += currentPart.charAt(charIndexInPart);
+                            typewriterElement.innerHTML = typedText;
+                            charIndexInPart++;
+                            setTimeout(type, 30); // Adjust typing speed for characters
+                        } else {
+                            // When a text part is finished, move to the next part.
+                            partIndex++;
+                            charIndexInPart = 0;
+                            setTimeout(type, 10);
+                        }
+                    }
+                } else {
+                    isTyping = false;
+                }
+            }
+            type();
+        }
+
+        // We use an observer to start the typewriter effect when the element is visible
+        const typewriterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !isTyping) {
+                    typeWriter();
+                    // We can choose to unobserve after it has been typed once
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Observe the code block container
+        const codeBlock = document.querySelector('.code-block-container');
+        if (codeBlock) {
+            typewriterObserver.observe(codeBlock);
+        }
     </script>
 </body>
 </html>
